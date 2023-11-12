@@ -1,10 +1,23 @@
-/* #ground{
-    height: 500px;
-    background-color: darksalmon;
-    border:solid 1 px #000;
-    color: beige;
+.container{
+    max-width: 1100px;
 }
-.jumbotron{
-    height: 250px;
-    background-color: lightblue;
+#ground{
+    height: 750px; 
+    width: 1100px; 
+    border:solid 1px #060;
+} 
+ #GameName{
+    width: 1100px; 
+    font-size:50px;
+    color: coral;
+    font-weight: bolder;
+    text-shadow: #000 3px 3px;
+    text-align: center;
+    
+}
+/*#GameState{
+    font-size:  75px;
+    color: red;
+    font-weight: bolder;
+    text-shadow: #000 5px 5px;
 } */
