@@ -24,16 +24,20 @@ $(function () { // Document.Ready
     var yay;
     var yayX = 500;
     var yayY = 700;
+    var yayWidth = 150;
+    var yayHeight = 40;
 
     yay = svg.rect({
         x: yayX,
         y: yayY,
-        width: 150,
-        height: 40,
+        width: yayWidth,
+        height: yayHeight,
         fill: '#933'
     });
 
     //#endregion
+
+    //#region  Topun yönü ve hareketleri
     var yon = [+1, -1];
     var yonX = yon[Math.floor(Math.random() * 2)];
     var yonY = yon[Math.floor(Math.random() * 2)];
@@ -52,5 +56,34 @@ $(function () { // Document.Ready
 
         topX = topX + yonX;
         topY = topY + yonY;
-    }, 1);
+    }, 10);
+    //#endregion
+
+    //#region Yayın hareketleri
+    $(document).mousemove(function (e) { // Mouse ile hareket ettirme
+        yayX = e.clientX;
+        if (yayX <= (groundWidth - yayWidth)) {
+            yay.attr({ x: yayX });
+        }
+    })
+
+    $(document).keydown(function (e) { // Mouse ile hareket ettirme
+        var code = event.which;
+
+        if (code == 37) // sola basıldığında
+        {
+            yayX = yayX - 30;
+            if (yayX > 0) {
+                yay.attr({ x: yayX });
+            }
+        }
+        else if (code == 39) // sağa basıldığında
+        { 
+            yayX = yayX + 30;
+            if (yayX <= (groundWidth - yayWidth)) {
+                yay.attr({ x: yayX });
+            }
+        }
+    })
+    //#endregion
 })
