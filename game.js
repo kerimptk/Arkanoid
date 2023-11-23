@@ -1,5 +1,5 @@
 $(function () { // Document.Ready    
-    $("#GameName").text("Arkanoid Oyunu (Kır Tuğlaları)");
+    $("#GameName").text("Arkanoid");
     var groundWidth = 1100;
     var groundHeight = 750;
 
@@ -43,11 +43,16 @@ $(function () { // Document.Ready
     var yonY = yon[Math.floor(Math.random() * 2)];
 
     var interval = setInterval(function () {
-        if (topX == topR || topX == groundWidth - topR) {
+        console.log(yayX,topX,yayX + yayWidth,topY + topR);
+        if (topX == topR || topX == groundWidth - topR) { // Top yan duvarlara çarparsa
             yonX = yonX * -1;
-        } else if (topY == topR) {
+        } else if (topY == topR) { //Top üst duvara çarparsa
             yonY = yonY * -1;
-        } else if (topY == groundHeight - topR) {
+        } else if ((yayX <= topX && topX <= (yayX + yayWidth)) && (topY + topR) == yayY) { // top yaya çarparsa
+            yonY = yonY * -1; 
+            alert();
+        }
+        else if (topY == groundHeight - topR) { // top yere düşerse
             clearInterval(interval);
             $("#GameState").text("Game Over");
         }
@@ -56,6 +61,7 @@ $(function () { // Document.Ready
 
         topX = topX + yonX;
         topY = topY + yonY;
+
     }, 10);
     //#endregion
 
@@ -69,20 +75,17 @@ $(function () { // Document.Ready
 
     $(document).keydown(function (e) { // Mouse ile hareket ettirme
         var code = event.which;
-
         if (code == 37) // sola basıldığında
         {
             yayX = yayX - 30;
-            if (yayX > 0) {
-                yay.attr({ x: yayX });
-            }
+            yayX = yayX < 0 ? 0 : yayX;
+            yay.attr({ x: yayX });
         }
         else if (code == 39) // sağa basıldığında
-        { 
+        {
             yayX = yayX + 30;
-            if (yayX <= (groundWidth - yayWidth)) {
-                yay.attr({ x: yayX });
-            }
+            yayX = yayX > (groundWidth - yayWidth) ? (groundWidth - yayWidth) : yayX;
+            yay.attr({ x: yayX });
         }
     })
     //#endregion
