@@ -7,6 +7,7 @@ $(function () { // Document.Ready
         width: groundWidth,
         height: groundHeight
     });
+
     //#region Topun tanımı ve özellikleri
     var top;
     var topX = 500;
@@ -20,6 +21,7 @@ $(function () { // Document.Ready
         fill: '#600'
     });
     //#endregion
+
     //#region Yayın tanımı ve özellikleri
     var yay;
     var yayX = 500;
@@ -34,7 +36,6 @@ $(function () { // Document.Ready
         height: yayHeight,
         fill: '#933'
     });
-
     //#endregion
 
     //#region  Topun yönü ve hareketleri
@@ -42,27 +43,24 @@ $(function () { // Document.Ready
     var yonX = yon[Math.floor(Math.random() * 2)];
     var yonY = yon[Math.floor(Math.random() * 2)];
 
-    var interval = setInterval(function () {
-        console.log(yayX,topX,yayX + yayWidth,topY + topR);
+    var interval = setInterval(function () { 
         if (topX == topR || topX == groundWidth - topR) { // Top yan duvarlara çarparsa
             yonX = yonX * -1;
         } else if (topY == topR) { //Top üst duvara çarparsa
             yonY = yonY * -1;
         } else if ((yayX <= topX && topX <= (yayX + yayWidth)) && (topY + topR) == yayY) { // top yaya çarparsa
-            yonY = yonY * -1; 
-            alert();
+            yonY = yonY * -1;  
         }
         else if (topY == groundHeight - topR) { // top yere düşerse
             clearInterval(interval);
-            $("#GameState").text("Game Over");
-        }
-
-        top.attr({ cx: topX, cy: topY });
+            $("#ground").text("Game Over");
+        }        
 
         topX = topX + yonX;
         topY = topY + yonY;
-
-    }, 10);
+        
+        top.attr({ cx: topX, cy: topY });
+    }, 1);
     //#endregion
 
     //#region Yayın hareketleri
