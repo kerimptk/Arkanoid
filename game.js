@@ -6,7 +6,7 @@ $(function () { // Document.Ready
     var svg = Pablo('#ground').svg({
         width: groundWidth,
         height: groundHeight,
-        fill:red
+        fill:'red'
     });
 
     //#region Topun tanımı ve özellikleri
